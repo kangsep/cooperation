@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,7 @@ Route::get('customer/my-name', [CustomerController::class, 'index']);
 Route::get('customer/my-city/{city}', [CustomerController::class, 'getCity']);
 
 Route::get('customer/get-student/{name}/{code}', [CustomerController::class, 'getStudent']);
+
+Route::get('person/create', [PersonController::class, 'create'])->name('person.create');
+Route::post('person/store', [PersonController::class, 'store'])->name('person.store');
 
