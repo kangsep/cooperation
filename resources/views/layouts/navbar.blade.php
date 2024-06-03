@@ -10,7 +10,7 @@
             <a class="nav-link active" aria-current="page" href="/">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('person.create') }}">Pendaftaran</a>
+            <a class="nav-link" href="{{ route('customer.index') }}">Nasabah</a>
           </li>
 
         </ul>
