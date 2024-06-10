@@ -20,15 +20,17 @@ Route::get('/', function () {
 });
 
 Route::get('customer/my-name', [CustomerController::class, 'index']);
-
 Route::get('customer/my-city/{city}', [CustomerController::class, 'getCity']);
-
 Route::get('customer/get-student/{name}/{code}', [CustomerController::class, 'getStudent']);
 
 Route::get('customer/create', [CustomerController::class, 'create'])->name('customer.create');
-
 Route::post('customer/store', [CustomerController::class, 'store'])->name('customer.store');
 
 Route::get('customer/{id}', [CustomerController::class, 'show'])->name('customer.show');
-
 Route::get('customer', [CustomerController::class, 'index'])->name('customer.index');
+
+Route::get('customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('customer/update', [CustomerController::class, 'update'])->name('customer.update');
+Route::delete('customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+

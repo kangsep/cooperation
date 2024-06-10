@@ -40,9 +40,9 @@ class CustomerController extends Controller
     }
     public function show($id) {
         //SELECT * FROM customer where id = x
-        $customer = Customer::fnd($id);
+        $customer = Customer::find($id);
 
-        return view('customer.show', compact('customer'));
+        return view('customers.show', compact('customer'));
     }
 
     public function index() {
@@ -55,5 +55,50 @@ class CustomerController extends Controller
         // SELECT * FROM customers by code == 1234
         //$customers = Customer::where('code', '1234')->get();
         return view('customers.index', compact('customers'));
+    }
+
+    //Method mengambil data yang diubah
+    public function edit($id) {
+        $customer = Customer::find($id);
+
+        return view('customers.edit', compact('customer'));
+    }
+
+    // --- Menyimpan data yang diubah
+    public function update(Request $request) {
+        $this->validate($request ,[
+            'name' => 'required|max:30',
+            'address' => 'required',
+            'phone' => 'numeric'
+        ]);
+
+        //
+        $customer = Customer::find($request->id);
+
+        $customer->name =$request->name;
+        $customer->phone =$request->phone;
+        $customer->address =$request->address;
+
+
+
+        // true / false
+        // return true
+        if($customer->save()){
+            return redirect()->route('customer.index')->with('success', "Data Nasabah $customer->code Berhasil di perbaharui");
+        } else {
+            dd('Data Gagal Disimpan');
+        }
+    }
+
+    // --- Hapus Data
+    public function destroy($id) {
+        $customer =  Customer::find($id);
+        $name = $customer->name;
+
+        if($customer->delete()){
+            return redirect()->route('customer.index')->with('success', "Data Nasabah $name Berhasil di hapus");
+        } else {
+            dd('Data Gagal Disimpan');
+        }
     }
 }
